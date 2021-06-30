@@ -13,7 +13,7 @@ passport.use(
       passwordField: "password",
       session: false,
     },
-    (username: any, password: any, done: any) => {
+    (username: string, password: string, done: any) => {
       if (username === "hoge" && password === "fuga") {
         return done(null, username);
       } else {
