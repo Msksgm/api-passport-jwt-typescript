@@ -9,7 +9,9 @@ router.post(
   passport.authenticate("local", { session: false }),
   (req, res, next) => {
     const user = req.user;
-    const token = jwt.sign(user, process.env.JWT_SECRET as string);
+    const token = jwt.sign({ user: user }, process.env.JWT_SECRET as string, {
+      expiresIn: 60,
+    });
     res.json({ user, token });
   }
 );
