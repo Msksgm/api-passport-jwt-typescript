@@ -9,8 +9,9 @@ router.post(
   passport.authenticate("local", { session: false }),
   (req, res, next) => {
     const user = req.user;
-    const token = jwt.sign({ user: user }, process.env.JWT_SECRET as string, {
-      expiresIn: 60,
+    const payload = { user: req.user };
+    const token = jwt.sign(payload, process.env.JWT_SECRET as string, {
+      expiresIn: "1m",
     });
     res.json({ user, token });
   }
